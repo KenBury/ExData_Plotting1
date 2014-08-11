@@ -1,0 +1,11 @@
+setwd("~/GitHub/ExData_Plotting1")
+download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",destfile = "./exdata-data-Fhousehold_power_consumption.zip",method="auto")
+unzip("./exdata-data-Fhousehold_power_consumption.zip")
+pdata <- read.table("./household_power_consumption.txt",header= TRUE , sep = ";", na.strings = c("?"))
+## pdata <- read.table("./household_power_consumption.txt",header= TRUE , sep = ";")
+pdata$DateTime <- strptime(paste(as.character(pdata$Date)," ",as.character(pdata$Time)), "%d/%m/%Y %H:%M:%S")
+spdata <- subset (pdata, DateTime >= as.POSIXlt( "2007-02-01 00:00:00") & DateTime <= as.POSIXlt( "2007-02-02 00:00:00"))
+with (spdata, plot (DateTime, Global_active_power, ylab = "Global Active Power (kilowatts)" , type ="l" ))
+dev.copy(png, file = "plot2.png")
+dev.off()
+
