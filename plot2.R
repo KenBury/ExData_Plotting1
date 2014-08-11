@@ -5,7 +5,7 @@ pdata <- read.table("./household_power_consumption.txt",header= TRUE , sep = ";"
 ## pdata <- read.table("./household_power_consumption.txt",header= TRUE , sep = ";")
 pdata$DateTime <- strptime(paste(as.character(pdata$Date)," ",as.character(pdata$Time)), "%d/%m/%Y %H:%M:%S")
 spdata <- subset (pdata, DateTime >= as.POSIXlt( "2007-02-01 00:00:00") & DateTime <= as.POSIXlt( "2007-02-02 00:00:00"))
+png( file = "plot2.png",width=480,height=480,res=72)
 with (spdata, plot (DateTime, Global_active_power, ylab = "Global Active Power (kilowatts)" , type ="l" ))
-dev.copy(png, file = "plot2.png")
 dev.off()
 
